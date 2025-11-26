@@ -98,24 +98,15 @@
 
 
 
-# python experiments/libero/run_libero_eval.py \
-#     --task_suite_name libero_spatial \
-#     --model_family libero_spatial \
-#     --model_id Yysrc/LIBERO-Spatial \
-#     --run_id_note None \
-#     --use_wandb False \
-#     --eval_mode temporal_ensemble \
-#     --dynamic_patches_threshold 0.12 \
-#     --target_patches_threshold 0.01 \
-#     --checkpoints_dir "" \
-#     --local_log_dir experiments/libero_eval_logs \
-#     --norm_file_path configs/norm_stats.json
+
+
+
 
 
 python experiments/libero/run_libero_eval.py \
-    --task_suite_name libero_10 \
-    --model_family libero_10 \
-    --model_id Yysrc/LIBERO-Long \
+    --task_suite_name libero_spatial \
+    --model_family mantis \
+    --model_id Yysrc/LIBERO-Spatial \
     --run_id_note None \
     --use_wandb False \
     --eval_mode temporal_ensemble \
@@ -124,6 +115,20 @@ python experiments/libero/run_libero_eval.py \
     --checkpoints_dir "" \
     --local_log_dir experiments/libero_eval_logs \
     --norm_file_path configs/norm_stats.json
+
+
+# python experiments/libero/run_libero_eval.py \
+#     --task_suite_name libero_10 \
+#     --model_family mantis \
+#     --model_id Yysrc/LIBERO-Long \
+#     --run_id_note None \
+#     --use_wandb False \
+#     --eval_mode temporal_ensemble \
+#     --dynamic_patches_threshold 0.12 \
+#     --target_patches_threshold 0.01 \
+#     --checkpoints_dir "" \
+#     --local_log_dir experiments/libero_eval_logs \
+#     --norm_file_path configs/norm_stats.json
 
 
 # action_chunking

@@ -32,9 +32,7 @@ from libero_utils import (
 
 @dataclass
 class GenerateConfig:
-    model_family: str = "mantis_vla"
-    # center_crop: bool = True
-    # long: bool=False 
+    model_family: str = "mantis"
     #################################################################################################################
     # LIBERO environment-specific parameters
     #################################################################################################################
