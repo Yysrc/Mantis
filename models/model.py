@@ -188,6 +188,7 @@ class MLLMInContext(PreTrainedModel):
             config.diffusion_model_id,
             subfolder="transformer",
             torch_dtype=torch.bfloat16,
+            use_safetensors=True,         
         )
         input_scale = math.sqrt(5.5)
 

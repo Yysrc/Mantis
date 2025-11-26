@@ -18,6 +18,7 @@ class MantisVLA:
         self,
         model_id: str,
         checkpoints_dir: str,
+        norm_file_path: None,
         target_image_size: int = 512,
         vae_downsample_f: int = 32,
         device: Optional[str] = None,
@@ -69,11 +70,8 @@ class MantisVLA:
             self.model.to("cuda")
             self.model.eval()
 
-            # Download the norm_stats locally (only downloads once; cached)
-            file_path = "/data/yangyi/Mantis/configs/norm_stats.json"
-
             # Load the JSON file
-            with open(file_path, "r") as f:
+            with open(norm_file_path, "r") as f:
                 norm_stats = json.load(f)
             self.norm_stats = norm_stats
 
@@ -87,7 +85,7 @@ class MantisVLA:
         instruction: str, 
         unnorm_key: str = None, 
         eval_mode: str = None, 
-        relevant_tokens_threshold: float = 0.0,
+        target_patches_threshold: float = 0.0,
     ) -> np.ndarray:
         image = [image]
 
@@ -113,8 +111,8 @@ class MantisVLA:
         unnorm_actions[..., -1] = np.where(unnorm_actions[..., -1] >= 0.5, -1.0, 1.0)
 
         top_relation_indices = None
-        if eval_mode in ["action_chunking_dynamic_temporal_agg"] and relation is not None:
-            top_k = int(len(relation) * relevant_tokens_threshold)
+        if eval_mode in ["adaptive_temporal_ensemble"] and relation is not None:
+            top_k = int(len(relation) * target_patches_threshold)
             top_relation_indices = torch.topk(relation, top_k).indices.tolist()
 
         return unnorm_actions, top_relation_indices, num_patches

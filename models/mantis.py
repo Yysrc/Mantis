@@ -69,22 +69,22 @@ class Mantis(PreTrainedModel):
         self.config = config
         self.model = MLLMInContext(MLLMInContextConfig(**config.to_dict()))
         self.loss_type = config.loss_type
-        self.vae = AutoencoderDC.from_pretrained(config.vae_id, subfolder="vae")
+        self.vae = AutoencoderDC.from_pretrained(config.vae_id, subfolder="vae", use_safetensors=True)
         self.training_mode = config.training_mode
 
         if self.loss_type == "flow":
             self.noise_scheduler = FlowMatchEulerDiscreteScheduler.from_pretrained(
-                config.noise_scheduler_id, subfolder="scheduler"
+                config.noise_scheduler_id, subfolder="scheduler", use_safetensors=True
             )
         elif self.loss_type == "diff":
             self.noise_scheduler = DDPMScheduler.from_pretrained(
-                config.noise_scheduler_id, subfolder="scheduler"
+                config.noise_scheduler_id, subfolder="scheduler", use_safetensors=True
             )
         else:
             raise ValueError(f"Unknown loss type {self.loss_type}")
 
         self.scheduler = DPMSolverMultistepScheduler.from_pretrained(
-            config.scheduler_id, subfolder="scheduler"
+            config.scheduler_id, subfolder="scheduler", use_safetensors=True
         )
 
         for module_name in config.modules_to_freeze:
@@ -611,7 +611,7 @@ class Mantis(PreTrainedModel):
 
         ###### Attention Score ######
         relation, num_patches = None, None
-        if eval_mode in ["action_chunking_dynamic_temporal_agg"]:
+        if eval_mode in ["adaptive_temporal_ensemble"]:
             outputs_attentions = mllm_output.attentions
             attn_tensor = torch.stack([attn.to(torch.float32) for attn in outputs_attentions], dim=0)
             attn_map = attn_tensor.mean(dim=(0, 2))

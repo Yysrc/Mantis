@@ -1,18 +1,16 @@
+import os
+import sys
+import json
 import torch
 import numpy as np
-import PIL.Image
 from typing import Optional, Dict, Any
-import json
-
-import sys
-import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from models.mantis import Mantis
 
 
 class MantisVLA:
-    cache_dir = "/data/yangyi/.cache"
+    cache_dir = ".cache"
 
     def __init__(
         self,
@@ -49,7 +47,6 @@ class MantisVLA:
                 ignore_mismatched_sizes=True,
             )
 
-            ###### Loading Part Checkpoints ######
             if checkpoints_dir:
                 print(f"Loading checkpoints from: {checkpoints_dir}")
                 
@@ -58,21 +55,6 @@ class MantisVLA:
                     map_location='cpu'
                 )
                 self.model.load_state_dict(state_dict)
-                
-                # embed_tokens_weight = torch.load(f"{checkpoints_dir}/embed_tokens_weight.pt")
-                # with torch.no_grad():
-                #     self.model.model.mllm_backbone.model.embed_tokens.weight.copy_(embed_tokens_weight)
-
-                # state_dict = torch.load(
-                #     f"{checkpoints_dir}/policy_head.pt",
-                #     map_location='cpu'
-                # )
-                # self.model.model.policy_head.load_state_dict(state_dict)
-            ###### Loading Part Checkpoints ######
-
-            total_params = 0
-            for param in self.model.parameters():
-                total_params += param.numel()
 
             if hasattr(self.model.model, 'transformer'):
                 del self.model.model.transformer
@@ -80,10 +62,6 @@ class MantisVLA:
                 del self.model.model.connector
             if hasattr(self.model.model, 'vae'):
                 del self.model.model.vae
-
-            total_params = 0
-            for param in self.model.parameters():
-                total_params += param.numel()
 
             self.model.to("cuda")
             self.model.eval()
@@ -106,7 +84,7 @@ class MantisVLA:
         instruction: str, 
         unnorm_key: str = None, 
         eval_mode: str = None, 
-        relevant_tokens_threshold: float = 0.0,
+        target_patches_threshold: float = 0.0,
     ) -> np.ndarray:
         image = [image]
 
@@ -133,8 +111,8 @@ class MantisVLA:
         # unnorm_actions[..., -1] = np.where(unnorm_actions[..., -1] >= 0.5, -1.0, 1.0)
 
         top_relation_indices = None
-        if eval_mode in ["action_chunking_dynamic_temporal_agg"] and relation is not None:
-            top_k = int(len(relation) * relevant_tokens_threshold)
+        if eval_mode in ["adaptive_temporal_ensemble"] and relation is not None:
+            top_k = int(len(relation) * target_patches_threshold)
             top_relation_indices = torch.topk(relation, top_k).indices.tolist()
 
         return unnorm_actions, top_relation_indices, num_patches
