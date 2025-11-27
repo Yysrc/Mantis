@@ -1,11 +1,10 @@
-import torch
-import numpy as np
-import PIL.Image
-from typing import Optional, Dict, Any
-import json
-
-import sys
 import os
+import sys
+import json
+import torch
+
+import numpy as np
+from typing import Optional, Dict, Any
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from models.mantis import Mantis
@@ -18,7 +17,7 @@ class MantisVLA:
         self,
         model_id: str,
         checkpoints_dir: str,
-        norm_file_path: None,
+        norm_file_path: str,
         target_image_size: int = 512,
         vae_downsample_f: int = 32,
         device: Optional[str] = None,
@@ -50,7 +49,6 @@ class MantisVLA:
                 ignore_mismatched_sizes=True,
             )
 
-            ###### Loading Part Checkpoints ######
             if checkpoints_dir: 
                 print(f"Loading checkpoints from: {checkpoints_dir}")
                 state_dict = torch.load(
@@ -58,7 +56,6 @@ class MantisVLA:
                     map_location='cpu'
                 )
                 self.model.load_state_dict(state_dict)
-            ###### Loading Part Checkpoints ######
 
             if hasattr(self.model.model, 'transformer'):
                 del self.model.model.transformer
@@ -70,7 +67,6 @@ class MantisVLA:
             self.model.to("cuda")
             self.model.eval()
 
-            # Load the JSON file
             with open(norm_file_path, "r") as f:
                 norm_stats = json.load(f)
             self.norm_stats = norm_stats
@@ -102,7 +98,6 @@ class MantisVLA:
 
         action_norm_stats = self.get_action_stats(unnorm_key)
         action_high, action_low = np.array(action_norm_stats["max"]), np.array(action_norm_stats["min"])
-        # action_low[-1] = -1.
 
         unnorm_actions = (
             0.5 * (output_action + 1) * (action_high - action_low)

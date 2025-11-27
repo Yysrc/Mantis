@@ -16,8 +16,7 @@ from dataclasses import dataclass
 from skimage.util import view_as_blocks
 from mantis_vla_utils import MantisVLA
 
-libero_path = os.path.join(os.getcwd(), "LIBERO")
-sys.path.append(libero_path)
+sys.path.append(os.path.join(os.getcwd(), "LIBERO"))
 from libero.libero import benchmark
 
 
@@ -33,16 +32,10 @@ from libero_utils import (
 @dataclass
 class GenerateConfig:
     model_family: str = "mantis"
-    #################################################################################################################
-    # LIBERO environment-specific parameters
-    #################################################################################################################
     task_suite_name: str = "libero_spatial"          # Task suite. Options: libero_spatial, libero_object, libero_goal, libero_10, libero_90
     num_steps_wait: int = 10                         # Number of steps to wait for objects to stabilize in sim
     num_trials_per_task: int = 50                    # Number of rollouts per task
 
-    #################################################################################################################
-    # Utils
-    #################################################################################################################
     run_id_note: Optional[str] = None                # Extra note to add in run ID for logging
     local_log_dir: str = "experiments/libero_eval_logs"  
     norm_file_path: str = "configs/norm_stats.json"

@@ -16,6 +16,7 @@ class MantisVLA:
         self,
         model_id: str,
         checkpoints_dir: str,
+        norm_file_path: str,
         target_image_size: int = 512,
         vae_downsample_f: int = 32,
         device: Optional[str] = None,
@@ -70,7 +71,7 @@ class MantisVLA:
             file_path = "/data/yangyi/mantis_action_refactoring/configs/norm_stats.json"
 
             # Load the JSON file
-            with open(file_path, "r") as f:
+            with open(norm_file_path, "r") as f:
                 norm_stats = json.load(f)
             self.norm_stats = norm_stats
 
@@ -101,14 +102,11 @@ class MantisVLA:
 
         action_norm_stats = self.get_action_stats(unnorm_key)
         action_high, action_low = np.array(action_norm_stats["max"]), np.array(action_norm_stats["min"])
-        # action_low[-1] = -1.
-        # aloha?
 
         unnorm_actions = (
             0.5 * (output_action + 1) * (action_high - action_low)
             + action_low
         )
-        # unnorm_actions[..., -1] = np.where(unnorm_actions[..., -1] >= 0.5, -1.0, 1.0)
 
         top_relation_indices = None
         if eval_mode in ["adaptive_temporal_ensemble"] and relation is not None:

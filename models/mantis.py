@@ -1,26 +1,20 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-
-from typing import Optional, Union, List
-
-import numpy as np
+import PIL
 import torch
+import numpy as np
+
+from tqdm import tqdm
+from typing import Optional, Union, List
+from models.model import MLLMInContextConfig, MLLMInContext
+
+from transformers import PreTrainedModel
 from diffusers.models import AutoencoderDC
+from diffusers.utils.torch_utils import randn_tensor
 from diffusers.pipelines.pipeline_utils import numpy_to_pil
 from diffusers.schedulers import (
     DDPMScheduler,
     FlowMatchEulerDiscreteScheduler,
     DPMSolverMultistepScheduler,
 )
-from diffusers.utils.torch_utils import randn_tensor
-from transformers import PreTrainedModel
-import PIL
-from tqdm import tqdm
-
-from models.model import MLLMInContextConfig, MLLMInContext
 from diffusers.training_utils import (
     compute_density_for_timestep_sampling,
     compute_loss_weighting_for_sd3,
@@ -115,16 +109,51 @@ class Mantis(PreTrainedModel):
                 if module is not None:
                     module.requires_grad_(True)
 
-        ###### New Code ######
-        import os
-        rank = int(os.environ.get("RANK", 0))
-        if rank == 0:
-            print('#' * 80)
-            print("Trainable Params:")
-            trainable_params = [name for name, param in self.named_parameters() if param.requires_grad]
-            for name in trainable_params:
-                print(name)
-        ###### New Code ######
+        #################################################################
+        embed_weight = self.model.mllm_backbone.model.embed_tokens.weight
+        if config.training_mode == "image":
+            embed_weight.requires_grad = False
+            embed_weight[
+                self.model.num_embeddings : -(config.num_actqueries + 2)
+            ].requires_grad = True
+            
+        elif config.training_mode == "action":
+            embed_weight.requires_grad = False
+            embed_weight[
+                self.model.num_embeddings + config.num_metaqueries + 2 + 
+                config.num_gapqueries * config.max_timestep_gap + 2:
+            ].requires_grad = True
+            
+        elif config.training_mode == "image_action":
+            embed_weight.requires_grad = False
+            embed_weight[
+                self.model.num_embeddings : 
+                self.model.num_embeddings + config.num_metaqueries + 2
+            ].requires_grad = True
+            embed_weight[
+                self.model.num_embeddings + config.num_metaqueries + 2 + 
+                config.num_gapqueries * config.max_timestep_gap + 2:
+            ].requires_grad = True
+            
+        elif config.training_mode == "image_action_language":
+            embed_weight.requires_grad = True
+            embed_weight[
+                self.model.num_embeddings + config.num_metaqueries + 2 : 
+                self.model.num_embeddings + config.num_metaqueries + 2 + 
+                config.num_gapqueries * config.max_timestep_gap + 2
+            ].requires_grad = False
+        #################################################################
+
+        # ###### New Code ######
+        # import os
+        # rank = int(os.environ.get("RANK", 0))
+        # if rank == 0:
+        #     print('#' * 80)
+        #     print("Trainable Params:")
+        #     trainable_params = [name for name, param in self.named_parameters() if param.requires_grad]
+        #     for name in trainable_params:
+        #         print(name)
+        # ###### New Code ######
     
     def get_input_embeddings(self):
         return self.model.mllm_backbone.model.embed_tokens
@@ -255,8 +284,7 @@ class Mantis(PreTrainedModel):
         loss_config = {
             "image_loss": (image_loss, 0.1),
             "action_loss": (action_loss, 1.0),
-            # "language_loss": (language_loss, 0.005)
-            "language_loss": (language_loss, 0.1)
+            "language_loss": (language_loss, 0.005)
         }
 
         total_loss = None
@@ -272,9 +300,6 @@ class Mantis(PreTrainedModel):
             "loss": total_loss,
             **loss_dict
         }
-        
-        # loss = 0.1 * image_loss + action_loss
-        # return {"loss": loss}
 
     @torch.no_grad()
     def decode_latents(self, latents, normalize=True, return_tensor=False):
@@ -510,9 +535,6 @@ class Mantis(PreTrainedModel):
 
         tokenize_func = self.get_tokenize_fn()
         tokenizer = self.get_tokenizer()
-
-        # timestep_gap = 4
-        # caption = [f"Instruction: {cap}. Generate the updated image observation after executing the instruction for {timestep_gap} timesteps." for cap in caption]
 
         input_ids, attention_mask, pixel_values, image_sizes, _ = tokenize_func(
             tokenizer, caption, gaps, input_images, training_mode="action"

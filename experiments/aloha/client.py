@@ -1,17 +1,17 @@
-import dataclasses
-import enum
-import logging
-import pathlib
 import time
-from typing import Any
-
-import msgpack
-import numpy as np
-import requests
-import polars as pl
+import enum
 import rich
 import tqdm
 import tyro
+import msgpack
+import logging
+import pathlib
+import requests
+import dataclasses
+
+import polars as pl
+import numpy as np
+
 
 logger = logging.getLogger(__name__)
 
