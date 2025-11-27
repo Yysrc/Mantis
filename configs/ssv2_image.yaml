@@ -1,15 +1,9 @@
 _gradient_checkpointing: True
-# vae_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
-# noise_scheduler_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
-# scheduler_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
-# mllm_id: "Qwen/Qwen2.5-VL-3B-Instruct"
-# diffusion_model_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
-
-vae_id: "/data/yangyi/.cache/models/Sana_600M_512px_diffusers"
-noise_scheduler_id: "/data/yangyi/.cache/models/Sana_600M_512px_diffusers"
-scheduler_id: "/data/yangyi/.cache/models/Sana_600M_512px_diffusers"
-mllm_id: "/data/yangyi/.cache/models/Qwen2.5-VL-3B-Instruct"
-diffusion_model_id: "/data/yangyi/.cache/models/Sana_600M_512px_diffusers"
+vae_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
+noise_scheduler_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
+scheduler_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
+mllm_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+diffusion_model_id: "Efficient-Large-Model/Sana_600M_512px_diffusers"
 
 vae_downsample_f: 32
 in_channels: 32
@@ -42,7 +36,9 @@ deepspeed: "configs/zero1.json"
 train_datasets:
   ssv2: -1
 eval_dataset: "ssv2"
-dataset_root_dir: "/data/yangyi/datasets/ssv2"
+dataset_root_dir: "datasets/ssv2"
+output_dir: "output_ssv2_image"
+save_dir: "checkpoints_ssv2_image"
 
 action_model_type: "DiT-L"
 action_dim: 7
@@ -53,8 +49,8 @@ training_mode: "image"
 max_timestep_gap: 6
 num_gapqueries: 3
 
-norm_stats_path: "/data/yangyi/mantis_action_refactoring/configs/norm_stats.json"
-unnorm_key: "libero_spatial"
+norm_stats_path: "configs/norm_stats.json"
+unnorm_key: ""
 
 save_part_checkpoints: True
 resume_from_checkpoint: null

@@ -5,7 +5,7 @@ from models.mantis import Mantis
 from qwen_vl_utils import process_vision_info
 
 
-model_path = "/data/yangyi/Mantis_models/Mantis-Base"
+model_path = "Yysrc/Mantis-Base"
 mantis = Mantis.from_pretrained(
     model_path,
 )
@@ -20,7 +20,7 @@ messages = [
         "content": [
             {
                 "type": "image", 
-                "image": "/data/yangyi/google.png"
+                "image": "your_image_path"
             },
             {
                 "type": "text", 

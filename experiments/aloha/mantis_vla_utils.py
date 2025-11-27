@@ -67,9 +67,6 @@ class MantisVLA:
             self.model.to("cuda")
             self.model.eval()
 
-            # Download the norm_stats locally (only downloads once; cached)
-            file_path = "/data/yangyi/mantis_action_refactoring/configs/norm_stats.json"
-
             # Load the JSON file
             with open(norm_file_path, "r") as f:
                 norm_stats = json.load(f)

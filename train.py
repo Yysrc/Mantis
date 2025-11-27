@@ -1,27 +1,22 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-
 import os
-import shutil
-from dataclasses import dataclass, field
-
-import PIL.Image
 import yaml
 import torch
-import transformers
 import wandb
-from transformers.trainer_utils import get_last_checkpoint
+import shutil
 import datasets
+import transformers
+import PIL.Image
 
+from PIL import PngImagePlugin
+from dataclasses import dataclass, field
+from accelerate.utils import release_memory
+from transformers.trainer_utils import get_last_checkpoint
+from torchvision.transforms.functional import to_pil_image
+
+from dataset import get_train_datasets
 from models.mantis import MantisConfig, Mantis
 from trainer import MantisTrainer, MantisCallback, SaveCallback
 from trainer_utils import possible_override_args, find_newest_checkpoint, get_full_dirs
-from dataset import get_train_datasets
-from accelerate.utils import release_memory
-from torchvision.transforms.functional import to_pil_image
 
 
 datasets.disable_caching()
@@ -34,8 +29,6 @@ os.environ["WANDB_MODE"] = "offline"
 
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
-
-from PIL import PngImagePlugin
 
 PIL.Image.MAX_IMAGE_PIXELS = None
 PngImagePlugin.MAX_TEXT_CHUNK = 100 * (1024**2)
@@ -57,16 +50,14 @@ class ModelArguments:
     mllm_id: str = "Qwen/Qwen2.5-VL-3B-Instruct"
     diffusion_model_id: str = "Efficient-Large-Model/Sana_600M_512px_diffusers"
     loss_type: str = "flow"
-    num_metaqueries: int = 256
+    num_metaqueries: int = 9
     modules_to_freeze: tuple[str] = ()
     modules_to_unfreeze: tuple[str] = ()
     max_input_text_tokens: int = 256
-    connector_num_hidden_layers: int = 24
+    connector_num_hidden_layers: int = 12
     system_prompt: str = (
         "You will be provided with an image observation and a corresponding instruction."
     )
-
-    ###### Action Code ######
     action_model_type: str = 'DiT-B'
     action_dim: int = 7
     future_action_window_size: int = 4
@@ -75,7 +66,6 @@ class ModelArguments:
     training_mode: str = "action"
     max_timestep_gap: int = 6
     num_gapqueries: int = 3
-    ###### Action Code ######
 
 
 @dataclass
@@ -87,14 +77,11 @@ class DataArguments:
     )
     eval_dataset: str = "libero"
     target_image_size: int = 512
-    
-    ###### Action Code ######
     wrist_image_size: int = 256
-    dataset_root_dir: str = "/data/yangyi/LIBERO_dataset/dataset_img_action/libero_spatial_img_action_512"
-    norm_stats_path: str = "/data/yangyi/mantis_action/configs/norm_stats.json"
+    dataset_root_dir: str = "Yysrc/mantis_libero_lerobot"
+    norm_stats_path: str = "configs/norm_stats.json"
     unnorm_key: str = "libero_spatial"
-    language_dataset_dir = "/data/yangyi/datasets/LLaVA-OneVision-1.5-Instruct-Data"
-    ###### Action Code ######
+    language_dataset_dir = "datasets/LLaVA-OneVision-1.5-Instruct-Data"
 
 
 @dataclass
@@ -106,7 +93,6 @@ class TrainingArguments(transformers.TrainingArguments):
     save_part_checkpoints: bool = True
     data_dir: str = ".cache"
     eval_on_start: bool = True
-    # evaluation_strategy: str = "epoch"
     evaluation_strategy: str = "steps"
     eval_steps: int = 5000
     eval_delay: int = 0
@@ -123,9 +109,7 @@ class TrainingArguments(transformers.TrainingArguments):
     lr_scheduler_type: str = "cosine_with_min_lr"
     lr_scheduler_kwargs: dict = field(default_factory=lambda: {"min_lr": 1e-5})
     logging_steps: int = 10
-    # warmup_ratio: float = 0.1
     warmup_steps: int = 5000
-    # save_strategy: str = "epoch"
     save_strategy: str = "steps"
     save_steps: int = 5000
     save_total_limit: int = 1
@@ -207,8 +191,6 @@ if __name__ == "__main__":
         data_collator=collate_fn,
         callbacks=[MantisCallback(), SaveCallback()],
     )
-    # trainer.log_images({"gt_images": [wandb.Image(to_pil_image(image)) for image in gt_images]})
-    # trainer.log_images({"src_images": [wandb.Image(to_pil_image(image)) for image in src_images]})
     trainer.log_images({
         "gt_images": [
             wandb.Image(image) if isinstance(image, PIL.Image.Image) else wandb.Image(to_pil_image(image))
