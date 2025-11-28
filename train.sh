@@ -22,8 +22,8 @@
 
 
 torchrun --nproc-per-node=8 train.py \
-    --run_name mantis_image_action_language_aloha_numbers \
-    --config_file /data/yangyi/mantis_action_refactoring/configs/image_action_language_training_aloha_numbers.yaml \
-    --base_dir /data/yangyi/mantis_action_refactoring \
-    --logging_dir /data/yangyi/mantis_action_refactoring/log \
-    > /data/yangyi/mantis_action_refactoring/log/image_action_language_aloha_numbers.log 2>&1
+    --run_name mantis_libero_spatial_image_action_language \
+    --config_file /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/configs/libero_spatial_image_action.yaml \
+    --base_dir /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis \
+    --logging_dir /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/log \
+    > /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/log/mantis_libero_spatial_image_action_language.log 2>&1

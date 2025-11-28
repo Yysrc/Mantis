@@ -174,6 +174,28 @@ if __name__ == "__main__":
             ),
         )
 
+    training_mode = model.config.training_mode
+    num_embeddings = model.model.num_embeddings
+    num_metaqueries = model.config.num_metaqueries
+    num_gapqueries = model.config.num_gapqueries
+    max_timestep_gap = model.config.max_timestep_gap
+    num_actqueries = model.config.num_actqueries
+
+    def freeze_hook(grad, mode):
+        if mode == "image":
+            grad[: num_embeddings].zero_()
+            grad[-(num_actqueries + 2) :].zero_()
+        elif mode == "action":
+            grad[: num_embeddings + num_metaqueries + 2 + num_gapqueries * max_timestep_gap + 2].zero_()
+        elif mode == "image_action":
+            grad[: num_embeddings].zero_()
+            grad[num_embeddings + num_metaqueries + 2 : num_embeddings + num_metaqueries + 2 + num_gapqueries * max_timestep_gap + 2].zero_()
+        elif mode == "image_action_language":
+            grad[num_embeddings + num_metaqueries + 2 : num_embeddings + num_metaqueries + 2 + num_gapqueries * max_timestep_gap + 2].zero_()
+        return grad
+    
+    model.model.mllm_backbone.model.embed_tokens.weight.register_hook(lambda grad: freeze_hook(grad, training_mode))
+
     with training_args.main_process_first(local=False):
         train_dataset, eval_dataset, gt_images, src_images, collate_fn = get_train_datasets(
             data_args,

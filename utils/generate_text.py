@@ -5,7 +5,7 @@ from models.mantis import Mantis
 from qwen_vl_utils import process_vision_info
 
 
-model_path = "Yysrc/Mantis-Base"
+model_path = "/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/output_libero_spatial/mantis_libero_spatial_image_action_language/checkpoint-5000"
 mantis = Mantis.from_pretrained(
     model_path,
 )
@@ -20,7 +20,7 @@ messages = [
         "content": [
             {
                 "type": "image", 
-                "image": "your_image_path"
+                "image": "/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/google.png"
             },
             {
                 "type": "text", 

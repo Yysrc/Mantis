@@ -108,52 +108,6 @@ class Mantis(PreTrainedModel):
                 module = getattr(self, module_name, None)
                 if module is not None:
                     module.requires_grad_(True)
-
-        #################################################################
-        embed_weight = self.model.mllm_backbone.model.embed_tokens.weight
-        if config.training_mode == "image":
-            embed_weight.requires_grad = False
-            embed_weight[
-                self.model.num_embeddings : -(config.num_actqueries + 2)
-            ].requires_grad = True
-            
-        elif config.training_mode == "action":
-            embed_weight.requires_grad = False
-            embed_weight[
-                self.model.num_embeddings + config.num_metaqueries + 2 + 
-                config.num_gapqueries * config.max_timestep_gap + 2:
-            ].requires_grad = True
-            
-        elif config.training_mode == "image_action":
-            embed_weight.requires_grad = False
-            embed_weight[
-                self.model.num_embeddings : 
-                self.model.num_embeddings + config.num_metaqueries + 2
-            ].requires_grad = True
-            embed_weight[
-                self.model.num_embeddings + config.num_metaqueries + 2 + 
-                config.num_gapqueries * config.max_timestep_gap + 2:
-            ].requires_grad = True
-            
-        elif config.training_mode == "image_action_language":
-            embed_weight.requires_grad = True
-            embed_weight[
-                self.model.num_embeddings + config.num_metaqueries + 2 : 
-                self.model.num_embeddings + config.num_metaqueries + 2 + 
-                config.num_gapqueries * config.max_timestep_gap + 2
-            ].requires_grad = False
-        #################################################################
-
-        # ###### New Code ######
-        # import os
-        # rank = int(os.environ.get("RANK", 0))
-        # if rank == 0:
-        #     print('#' * 80)
-        #     print("Trainable Params:")
-        #     trainable_params = [name for name, param in self.named_parameters() if param.requires_grad]
-        #     for name in trainable_params:
-        #         print(name)
-        # ###### New Code ######
     
     def get_input_embeddings(self):
         return self.model.mllm_backbone.model.embed_tokens
