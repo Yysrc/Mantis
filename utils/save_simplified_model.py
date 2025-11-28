@@ -5,16 +5,16 @@ import torch
 sys.path.append(os.getcwd())
 from models.mantis import Mantis
 
-model_path = "/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/output_libero_spatial/mantis_libero_spatial_image_action_language/checkpoint-450"
+model_path = "/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/output_libero_spatial/mantis_libero_spatial_image_action_language/checkpoint-200"
 mantis = Mantis.from_pretrained(
     model_path,
 )
-mantis.load_state_dict(torch.load("/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/checkpoints_libero_spatial/whole_model/epoch0_12_step50/model.pt"))
+mantis.load_state_dict(torch.load("/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/checkpoints_libero_spatial/whole_model/epoch0_06_step50/model.pt"))
 # mantis.save_pretrained("save_dir")
 weight1 = mantis.model.mllm_backbone.model.embed_tokens.weight.clone()
 
 
-mantis.load_state_dict(torch.load("/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/checkpoints_libero_spatial/whole_model/epoch0_96_step400/model.pt"))
+mantis.load_state_dict(torch.load("/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/checkpoints_libero_spatial/whole_model/epoch0_18_step150/model.pt"))
 weight2 = mantis.model.mllm_backbone.model.embed_tokens.weight.clone()
 
 print("第一个权重的形状:", weight1.shape)
@@ -66,21 +66,8 @@ print(f"不同行比例: {100 - same_rows_ratio:.4f}%")
 
 # 可选：输出前10个相同/不同行的索引（便于验证）
 print(f"\n前10个相同行的索引: {same_rows_indices[:10]}")
-print(f"前10个不同行的索引: {different_rows_indices[:70]}")
+print(f"不同行的索引: {different_rows_indices}")
 
-# ==============================================
-# 进阶：批量按行比较（效率更高，适合大数据量）
-# ==============================================
-print("\n===== 批量验证（效率优化版） =====")
-# 批量判断每行是否近似相等（返回 [N,] 的布尔张量）
-row_wise_equal = torch.all(torch.isclose(weight1, weight2, atol=epsilon), dim=1)
-batch_same_count = torch.sum(row_wise_equal).item()
-
-# 验证两种方法结果一致
-print(f"批量计算的相同行数: {batch_same_count:,}")
-print(f"逐行计算与批量计算结果是否一致: {batch_same_count == same_rows_count}")
-
-# 批量获取相同/不同行索引
-batch_same_indices = torch.where(row_wise_equal)[0].cpu().numpy().tolist()
-batch_diff_indices = torch.where(~row_wise_equal)[0].cpu().numpy().tolist()
-print(f"批量获取的前10个相同行索引: {batch_same_indices[:10]}")
+for id in different_rows_indices:
+    token = mantis.model.tokenizer.decode(id)
+    print(f"{id} : {token}")
