@@ -66,7 +66,7 @@ More demos coming soon...
 ## 📖 Introduction
 
 #### Previous vision-augmented action learning paradigms
-<!-- ![arch](assets/differences.png) -->
+![arch](assets/differences.png)
 
 #### Overall framework of Mantis
 ![arch](assets/arch.png)
