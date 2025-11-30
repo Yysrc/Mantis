@@ -22,4 +22,3 @@ dependencies:
     - scikit-image==0.25.2
     - matplotlib==3.10.7
     - draccus==0.10.0
-    - qwen-vl-utils

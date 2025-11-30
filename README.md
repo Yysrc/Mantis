@@ -132,22 +132,19 @@ First, clone the repository and create the conda environment:
 ```
 git clone git@github.com:Yysrc/Mantis.git
 cd Mantis
-conda env create -f environment_libero.yml
+conda create -n mantis_libero python=3.11 -y
 conda activate mantis_libero
-# conda create -n mantis_libero python=3.11 -y
-# conda activate mantis_libero
 ```
 ```
-# pip install torch==2.3.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-# conda install -y pytorch==2.5.0 pytorch-cuda=12.4 torchvision torchaudio -c pytorch -c nvidia
-# conda install -y pytorch==2.3.0 pytorch-cuda=12.1 torchvision torchaudio -c pytorch -c nvidia
 # Look up https://pytorch.org/get-started/previous-versions/ with your CUDA version for a correct command
-# pip install torch==2.5.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-# pip install -r requirements.txt
+pip install torch==2.5.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+pip install torch==2.3.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install -r requirements.txt
 ```
 Then clone and install the [LIBERO repository](https://github.com/Lifelong-Robot-Learning/LIBERO):
 ```
-cd LIBEROgit clone git@github.com:Lifelong-Robot-Learning/LIBERO.git
+git clone git@github.com:Lifelong-Robot-Learning/LIBERO.git
 cd LIBERO
 pip install -e .
 ```
