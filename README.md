@@ -29,7 +29,7 @@
 - [📚 Citation](#citation)
 
 
-## Demos
+## 🎥 Demos
 #### In-domain instructions (3x speed):
 <table style="width:100%;border-collapse:collapse;table-layout: fixed">
 <tr>
@@ -38,9 +38,9 @@
   <td style="text-align:center;width:33.33%;">Put the watch<br>in the basket</td>
 </tr>
 <tr>
-  <td><img src="assets/mantis_id_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
-  <td><img src="assets/mantis_id_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
-  <td><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3"></td>
 </tr>
 <tr>
 <table>
@@ -53,66 +53,30 @@
   <td style="text-align:center;width:33.33%;">Put a thing that can<br>tell the time in the basket</td>
 </tr>
 <tr>
-  <td><img src="assets/mantis_ood_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
-  <td><img src="assets/mantis_ood_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
-  <td><img src="assets/mantis_ood_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_watch_x3.gif" alt="mantis_id_watch_x3"></td>
 </tr>
 <tr>
 <table>
 
 
 
-
-#### Create environment
-
-```
-cd mantis_action
-conda env create -f environment.yml
-conda activate mantis_action
-```
-
-
-
-#### LIBERO Setup
-
-Clone and install the [LIBERO repo](https://github.com/Lifelong-Robot-Learning/LIBERO):
-
-```
-git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git
-cd LIBERO
-pip install -e .
-```
-
-Additionally, install other required packages:
-
-```
-cd ..
-pip install -r experiments/robot/libero/libero_requirements.txt
-```
-
-
-
-#### Training
-
-First, modify the content of the configuration file. The `training_mode` can be set to train either the image generation function or the action generation function. The available options are `"action"`, `"image"`, and `"mix"`.
-
-```
-torchrun --nproc-per-node=4 train.py \
-	--run_name mantis_action_test \
-	--config_file qwen2p5vl3b_sana.yaml \
-    --base_dir /data/yangyi/mantis_action \
-    --logging_dir /data/yangyi/mantis_action/log \ 
-	> /data/yangyi/mantis_action/log/mantis_action.log 2>&1
-```
-
-
-
-#### Evaluation
-
-- Evaluation on LIBERO:
-
-  ```
-  sh experiments/libero/run_libero_eval.sh
-  ```
-
-  
+## 🤗 Models & Datasets
+<table>
+  <tr>
+    <th>Model Name</th>
+    <th>HF Path</th>
+    <th>Note</th>
+  </tr>
+  <tr>
+    <td>Mantis-Base</td>
+    <td><a href="https://huggingface.co/Yysrc/Mantis-Base">Yysrc/Mantis-Base</a></td>
+    <td>The Mantis base model after pretraining</td></td>
+  </tr>
+    <tr>
+    <td> - </td>
+    <td><a href="https://huggingface.co/qwbu/univla-latent-action-model">univla-latent-action-model</a></td>
+    <td> actions.</td>
+  </tr>
+</table>
