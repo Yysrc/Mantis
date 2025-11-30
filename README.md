@@ -42,8 +42,7 @@
   <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_ironman_x3.gif" alt="mantis_id_ironman_x3" style="width: 400px; height: auto;"></td>
   <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3" style="width: 400px; height: auto;"></td>
 </tr>
-<tr>
-<table>
+</table>
 
 #### Out-of-domain instructions (3x speed):
 <table style="width:100%;border-collapse:collapse;table-layout: fixed">
@@ -57,8 +56,7 @@
   <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_ironman_x3.gif" alt="mantis_id_ironman_x3" style="width: 400px; height: auto;"></td>
   <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_watch_x3.gif" alt="mantis_id_watch_x3" style="width: 400px; height: auto;"></td>
 </tr>
-<tr>
-<table>
+</table>
 
 
 
