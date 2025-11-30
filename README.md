@@ -65,8 +65,9 @@ More demos coming soon...
 ## 📖 Introduction
 
 #### The difference from previous works
-<!-- ![diffenrences](assets/differences.png) -->
-<img src="assets/differences.png" alt="diffenrences" style="zoom:50%;" />
+<div style="text-align: center;">
+<img src="assets/differences.png" alt="diffenrences" style="width:75%;" />
+</div>
 
 #### Overall framework of Mantis
 ![arch](assets/arch.png)
