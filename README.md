@@ -21,8 +21,8 @@
 
 
 ## Table of Contents
-- [🎥 Demos](#demos)
-- [🤗 Models & Datasets](#models--datasets)
+- [🎥 Demos](#-demos)
+- [🤗 Models & Datasets](#-models--datasets)
 - [📈 Evaluation](#evaluation)
 - [🔧 Training](#training)
 - [📚 Citation](#citation)
