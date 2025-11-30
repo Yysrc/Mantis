@@ -20,10 +20,10 @@
 
 
 
-## Table of Contents
-- [🎥 Demos](#-demos)
-- [🤗 Models & Datasets](#-models--datasets)
-- [📈 Evaluation](#evaluation)
+## 📘 Contents
+- [Demos](#-demos)
+- [Models & Datasets](#-models--datasets)
+- [Getting Started For Inference](#-getting-started-for-inference)
 - [🔧 Training](#training)
 - [📚 Citation](#citation)
 
@@ -108,3 +108,13 @@ More demos coming soon...
     <td>The LIBERO dataset used for fine-tuning</td>
   </tr>
 </table>
+
+
+
+## 📈 Getting Started For Inference
+```
+conda env create -f environment.yml
+conda activate mantis_libero
+```
+
+
