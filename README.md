@@ -34,7 +34,7 @@
 <table style="width:100%;border-collapse:collapse;table-layout: fixed">
 <tr>
   <td style="text-align:center;width:33.33%;">Put the cup on<br>the female singer</td>
-  <td style="text-align:center;width:33.33%;">Put the cup on<br>the Marval superhero</td>
+  <td style="text-align:center;width:33.33%;">Put the cup on<br>the Marvel superhero</td>
   <td style="text-align:center;width:33.33%;">Put the watch<br>in the basket</td>
 </tr>
 <tr>
@@ -61,20 +61,50 @@
 
 
 ## 🤗 Models & Datasets
-<table>
+<table style="width:100%;border-collapse:collapse;table-layout: fixed">
   <tr>
-    <th>Model Name</th>
-    <th>HF Path</th>
-    <th>Note</th>
+    <th style="text-align:center;width:25%;">Model</th>
+    <th style="text-align:center;width:75%;">Note</th>
   </tr>
   <tr>
-    <td>Mantis-Base</td>
-    <td><a href="https://huggingface.co/Yysrc/Mantis-Base">Yysrc/Mantis-Base</a></td>
-    <td>The Mantis base model after pretraining</td></td>
+    <td><a href="https://huggingface.co/Yysrc/Mantis-Base">Mantis-Base</a></td>
+    <td>Base Mantis model trained through the 3-stage pretraining pipeline</td></td>
+  </tr>
+  <tr>
+    <td><a href="https://huggingface.co/Yysrc/SSV2-Pretrained">Mantis-SSV2</a></td>
+    <td>Mantis model pretrained on the SSV2 dataset after Stage 1</td>
+  </tr>
+  <tr>
+    <td>
+    <a href="https://huggingface.co/collections/Yysrc/mantis">Mantis-LIBERO</a>
+    </td>
+    <td>Mantis model fine-tuned on the LIBERO dataset</td>
+  </tr>
+</table>
+
+<table style="width:100%;border-collapse:collapse;table-layout: fixed">
+  <tr>
+    <th style="text-align:center;width:40%;">Dataset</th>
+    <th style="text-align:center;width:60%;">Note</th>
+  </tr>
+  <tr>
+    <td><a href="https://www.qualcomm.com/developer/software/something-something-v-2-dataset">Something-Something-v2</a></td>
+    <td>The human action video dataset used in Stage 1 pretraining</td></td>
+  </tr>
+  <tr>
+    <td><a href="https://huggingface.co/datasets/IPEC-COMMUNITY/droid_lerobot">DROID-Lerobot</a></td>
+    <td>The robot dataset used in Stage 2 & 3 pretraining</td>
+  </tr>
+  <tr>
+    <td>
+    <a href="https://huggingface.co/datasets/mvp-lab/LLaVA-OneVision-1.5-Instruct-Data">LLaVA-OneVision-1.5-Instruct-Data</a>
+    </td>
+    <td>The multimodal dataset used in Stage 3 pretraining</td>
   </tr>
     <tr>
-    <td> - </td>
-    <td><a href="https://huggingface.co/qwbu/univla-latent-action-model">univla-latent-action-model</a></td>
-    <td> actions.</td>
+    <td>
+    <a href="https://huggingface.co/datasets/Yysrc/mantis_libero_lerobot">LIBERO-Lerobot</a>
+    </td>
+    <td>The LIBERO dataset used for fine-tuning</td>
   </tr>
 </table>
