@@ -64,10 +64,8 @@ More demos coming soon...
 
 ## 📖 Introduction
 
-#### The difference from previous works
-<div style="text-align: center;">
-<img src="assets/differences.png" alt="diffenrences" style="width:75%;" />
-</div>
+#### Previous vision-augmented action learning paradigms
+![arch](assets/differences.png)
 
 #### Overall framework of Mantis
 ![arch](assets/arch.png)
