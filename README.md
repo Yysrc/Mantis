@@ -30,21 +30,35 @@
 
 
 ## Demos
-#### In-domain instructions:
-<table style="width:100%;border-collapse:collapse;">
+#### In-domain instructions (3x speed):
+<table style="width:100%;border-collapse:collapse;table-layout: fixed">
 <tr>
-  <td style="text-align:center;">Put the cup on the<br>female singer (3x speed)</td>
-  <td style="text-align:center;">Put the cup on the<br>Marval superhero (3x speed)</td>
-  <td style="text-align:center;">Put the cup on the<br>basketball player (3x speed)</td>
+  <td style="text-align:center;width:33.33%;">Put the cup on<br>the female singer</td>
+  <td style="text-align:center;width:33.33%;">Put the cup on<br>the Marval superhero</td>
+  <td style="text-align:center;width:33.33%;">Put the watch<br>in the basket</td>
 </tr>
 <tr>
   <td><img src="assets/mantis_id_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
-  <td><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+  <td><img src="assets/mantis_id_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
   <td><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3"></td>
 </tr>
 <tr>
 <table>
 
+#### Out-of-domain instructions (3x speed):
+<table style="width:100%;border-collapse:collapse;table-layout: fixed">
+<tr>
+  <td style="text-align:center;width:33.33%;">Put the cup on<br>Taylor Swift</td>
+  <td style="text-align:center;width:33.33%;">Put the cup on<br>Iron Man</td>
+  <td style="text-align:center;width:33.33%;">Put a thing that can<br>tell the time in the basket</td>
+</tr>
+<tr>
+  <td><img src="assets/mantis_ood_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
+  <td><img src="assets/mantis_ood_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
+  <td><img src="assets/mantis_ood_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+</tr>
+<tr>
+<table>
 
 
 
