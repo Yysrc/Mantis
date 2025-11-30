@@ -22,10 +22,12 @@
 
 ## 📘 Contents
 - [Demos](#-demos)
+- [Introduction](#-introduction)
 - [Models & Datasets](#-models--datasets)
-- [Getting Started For Inference](#-getting-started-for-inference)
-- [🔧 Training](#training)
-- [📚 Citation](#citation)
+- [Evaluation](#-evaluation)
+- [Training](#-training)
+- [Citation](#-citation)
+- [Acknowledgements](#acknowledgements)
 
 
 ## 🎥 Demos
@@ -57,6 +59,20 @@ More demos coming soon...
   <td><img src="assets/mantis_ood_watch_x3.gif" alt="mantis_id_watch_x3"></td>
 </tr>
 </table>
+
+
+
+## 📖 Introduction
+
+#### The difference from previous works
+<!-- ![diffenrences](assets/differences.png) -->
+<img src="assets/differences.png" alt="diffenrences" style="zoom:50%;" />
+
+#### Overall framework of Mantis
+![arch](assets/arch.png)
+
+
+
 
 
 
@@ -111,14 +127,17 @@ More demos coming soon...
 
 
 
-## 📈 Getting Started For Inference
-#### LIBERO Evaluation
+## 📈 Evaluation
 First, clone the repository and create the conda environment:
 ```
 git clone git@github.com:Yysrc/Mantis.git
 cd Mantis
-conda env create -f environment.yml
+conda create -n mantis_libero python=3.11 -y
 conda activate mantis_libero
+```
+```
+pip install torch==2.5.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+pip install -r requirements.txt
 ```
 Then clone and install the [LIBERO repository](https://github.com/Lifelong-Robot-Learning/LIBERO):
 ```
@@ -137,3 +156,19 @@ sh experiments/libero/run_libero_eval.sh
 ```
 Modify the `task_suite_name` parameter in the script to evaluate different task suites. Adjust the `eval_mode` parameter to switch between $\textbf{TE}$ and $\textbf{ATE}$ modes.
 
+
+## 🔧 Training
+
+## 📝 Citation
+If you find our code or models useful in your work, please cite [our paper](https://arxiv.org/pdf/2511.16175):
+```
+@article{yang2025mantis,
+  title={Mantis: A Versatile Vision-Language-Action Model with Disentangled Visual Foresight},
+  author={Yang, Yi and Li, Xueqi and Chen, Yiyang and Song, Jin and Wang, Yihan and Xiao, Zipeng and Su, Jiadi and Qiaoben, You and Liu, Pengfei and Deng, Zhijie},
+  journal={arXiv preprint arXiv:2511.16175},
+  year={2025}
+}
+```
+
+## ✨ Acknowledgements
+Heartfelt thanks to the creators of [Metaquery](https://github.com/facebookresearch/metaquery) and [Lerobot](https://github.com/huggingface/lerobot) for their open-sourced work!
