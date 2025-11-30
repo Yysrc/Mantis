@@ -16,20 +16,34 @@
   <a href="./LICENSE"><b>📜 License</b></a>
 </p>
 
-
-
-
-<h5 align="center">
-
-</h5>
-
-
-
-
-
-
-
 ![head](assets/head.png)
+
+
+
+## Table of Contents
+- [🎥 Demos](#demos)
+- [🤗 Models & Datasets](#models)
+- [⚡ Quick Start](#getting_start)
+- [📈 Evaluation](#evaluation)
+- [🔧 Training](#training)
+- [📚 Citation](#citation)
+
+
+## Demos
+#### In-domain instructions:
+<table style="width:100%;border-collapse:collapse;">
+<tr>
+  <td style="text-align:center;">Put the cup on the<br>female singer (3x speed)</td>
+  <td style="text-align:center;">Put the cup on the<br>Marval superhero (3x speed)</td>
+  <td style="text-align:center;">Put the cup on the<br>basketball player (3x speed)</td>
+</tr>
+<tr>
+  <td><img src="assets/mantis_id_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
+  <td><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+  <td><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+</tr>
+<tr>
+<table>
 
 
 

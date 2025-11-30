@@ -106,7 +106,7 @@
 python experiments/libero/run_libero_eval.py \
     --task_suite_name libero_spatial \
     --model_family mantis \
-    --model_id Yysrc/LIBERO-Spatial \
+    --model_id /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/output_libero_spatial/mantis_libero_spatial_image_action_language/checkpoint-11000 \
     --run_id_note None \
     --use_wandb False \
     --eval_mode temporal_ensemble \
