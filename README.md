@@ -112,9 +112,28 @@ More demos coming soon...
 
 
 ## 📈 Getting Started For Inference
+#### LIBERO Evaluation
+First, clone the repository and create the conda environment:
 ```
+git clone git@github.com:Yysrc/Mantis.git
+cd Mantis
 conda env create -f environment.yml
 conda activate mantis_libero
 ```
-
+Then clone and install the [LIBERO repository](https://github.com/Lifelong-Robot-Learning/LIBERO):
+```
+git clone git@github.com:Lifelong-Robot-Learning/LIBERO.git
+cd LIBERO
+pip install -e .
+```
+Install other required packages:
+```
+cd Mantis
+pip install -r experiments/libero/libero_requirements.txt
+```
+Evaluate the Libero benchmark:
+```
+sh experiments/libero/run_libero_eval.sh
+```
+Modify the `task_suite_name` parameter in the script to evaluate different task suites. Adjust the `eval_mode` parameter to switch between $\textbf{TE}$ and $\textbf{ATE}$ modes.
 
