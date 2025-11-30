@@ -38,9 +38,9 @@
   <td style="text-align:center;width:33.33%;">Put the watch<br>in the basket</td>
 </tr>
 <tr>
-  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
-  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
-  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_taylor_x3.gif" alt="mantis_id_taylor_x3" style="width: 400px; height: auto;"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_ironman_x3.gif" alt="mantis_id_ironman_x3" style="width: 400px; height: auto;"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_id_watch_x3.gif" alt="mantis_id_watch_x3" style="width: 400px; height: auto;"></td>
 </tr>
 <tr>
 <table>
@@ -53,9 +53,9 @@
   <td style="text-align:center;width:33.33%;">Put a thing that can<br>tell the time in the basket</td>
 </tr>
 <tr>
-  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_taylor_x3.gif" alt="mantis_id_taylor_x3"></td>
-  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_ironman_x3.gif" alt="mantis_id_ironman_x3"></td>
-  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_watch_x3.gif" alt="mantis_id_watch_x3"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_taylor_x3.gif" alt="mantis_id_taylor_x3" style="width: 400px; height: auto;"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_ironman_x3.gif" alt="mantis_id_ironman_x3" style="width: 400px; height: auto;"></td>
+  <td style="text-align:center;width:33.33%;"><img src="assets/mantis_ood_watch_x3.gif" alt="mantis_id_watch_x3" style="width: 400px; height: auto;"></td>
 </tr>
 <tr>
 <table>
