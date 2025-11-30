@@ -26,8 +26,8 @@
 - [Models & Datasets](#-models--datasets)
 - [Evaluation](#-evaluation)
 - [Training](#-training)
-- [Citation](#-citation)
 - [Acknowledgements](#acknowledgements)
+- [Citation](#-citation)
 
 
 ## 🎥 Demos
@@ -132,12 +132,18 @@ First, clone the repository and create the conda environment:
 ```
 git clone git@github.com:Yysrc/Mantis.git
 cd Mantis
-conda create -n mantis_libero python=3.11 -y
+conda env create -f environment.yml
 conda activate mantis_libero
+# conda create -n mantis_libero python=3.11 -y
+# conda activate mantis_libero
 ```
 ```
-pip install torch==2.5.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-pip install -r requirements.txt
+# pip install torch==2.3.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# conda install -y pytorch==2.5.0 pytorch-cuda=12.4 torchvision torchaudio -c pytorch -c nvidia
+# conda install -y pytorch==2.3.0 pytorch-cuda=12.1 torchvision torchaudio -c pytorch -c nvidia
+# Look up https://pytorch.org/get-started/previous-versions/ with your CUDA version for a correct command
+# pip install torch==2.5.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# pip install -r requirements.txt
 ```
 Then clone and install the [LIBERO repository](https://github.com/Lifelong-Robot-Learning/LIBERO):
 ```
@@ -150,7 +156,7 @@ Install other required packages:
 cd Mantis
 pip install -r experiments/libero/libero_requirements.txt
 ```
-Evaluate the Libero benchmark:
+Evaluate the LIBERO benchmark:
 ```
 sh experiments/libero/run_libero_eval.sh
 ```
@@ -158,6 +164,11 @@ Modify the `task_suite_name` parameter in the script to evaluate different task 
 
 
 ## 🔧 Training
+
+
+
+## ✨ Acknowledgements
+Heartfelt thanks to the creators of [Metaquery](https://github.com/facebookresearch/metaquery) and [Lerobot](https://github.com/huggingface/lerobot) for their open-sourced work!
 
 ## 📝 Citation
 If you find our code or models useful in your work, please cite [our paper](https://arxiv.org/pdf/2511.16175):
@@ -169,6 +180,3 @@ If you find our code or models useful in your work, please cite [our paper](http
   year={2025}
 }
 ```
-
-## ✨ Acknowledgements
-Heartfelt thanks to the creators of [Metaquery](https://github.com/facebookresearch/metaquery) and [Lerobot](https://github.com/huggingface/lerobot) for their open-sourced work!
