@@ -22,14 +22,14 @@
 
 ## Table of Contents
 - [🎥 Demos](#demos)
-- [🤗 Models & Datasets](#models)
-- [⚡ Quick Start](#getting_start)
+- [🤗 Models & Datasets](#models--datasets)
 - [📈 Evaluation](#evaluation)
 - [🔧 Training](#training)
 - [📚 Citation](#citation)
 
 
 ## 🎥 Demos
+More demos coming soon...
 #### In-domain instructions (3x speed):
 <table style="width:100%;border-collapse:collapse;table-layout: fixed">
 <tr>
