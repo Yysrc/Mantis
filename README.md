@@ -132,7 +132,7 @@ First, clone the repository and create the conda environment:
 ```
 git clone git@github.com:Yysrc/Mantis.git
 cd Mantis
-conda env create -f environment.yml
+conda env create -f environment_libero.yml
 conda activate mantis_libero
 # conda create -n mantis_libero python=3.11 -y
 # conda activate mantis_libero
@@ -147,7 +147,7 @@ conda activate mantis_libero
 ```
 Then clone and install the [LIBERO repository](https://github.com/Lifelong-Robot-Learning/LIBERO):
 ```
-git clone git@github.com:Lifelong-Robot-Learning/LIBERO.git
+cd LIBEROgit clone git@github.com:Lifelong-Robot-Learning/LIBERO.git
 cd LIBERO
 pip install -e .
 ```
