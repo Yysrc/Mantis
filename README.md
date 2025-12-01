@@ -154,6 +154,22 @@ Modify the `task_suite_name` parameter in the script to evaluate different task 
 
 
 ## 🔧 Training
+>Please first download the [LIBERO datasets](https://huggingface.co/datasets/Yysrc/mantis_libero_lerobot) that we used in experiments
+
+First, create the training conda environment:
+```
+conda env create -f environment_lerobot.yml
+conda activate mantis_lerobot
+```
+
+Then clone and install the Lerobot repository:
+```
+git clone -b paszea/lerobot git@github.com:Yysrc/lerobot.git
+cd lerobot
+conda install ffmpeg=7.1.1 -c conda-forge
+pip install -e .
+```
+
 
 
 

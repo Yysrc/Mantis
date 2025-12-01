@@ -22,8 +22,8 @@
 
 
 torchrun --nproc-per-node=8 train.py \
-    --run_name mantis_libero_spatial_image_action_language \
-    --config_file /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/configs/libero_spatial_image_action.yaml \
-    --base_dir /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis \
-    --logging_dir /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/log \
-    > /inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/cyy/Mantis/log/mantis_libero_spatial_image_action_language.log 2>&1
+    --run_name mantis_libero_spatial_image_action \
+    --config_file libero_spatial_image_action.yaml \
+    --base_dir ./ \
+    --logging_dir log \
+    > log/mantis_libero_spatial_image_action.log 2>&1

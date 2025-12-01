@@ -87,7 +87,7 @@ class DataArguments:
 @dataclass
 class TrainingArguments(transformers.TrainingArguments):
     ddp_timeout: int = 36000
-    base_dir: str = "/path/to/base_dir"
+    base_dir: str = "."
     output_dir: str = "output"
     save_dir: str = "checkpoints"
     save_part_checkpoints: bool = True
