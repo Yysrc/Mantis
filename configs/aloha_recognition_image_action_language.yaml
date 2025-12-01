@@ -55,4 +55,4 @@ norm_stats_path: "configs/norm_stats.json"
 unnorm_key: "aloha"
 
 save_part_checkpoints: True
-resume_from_checkpoint: null
+resume_from_checkpoint: "mantis_base_path"

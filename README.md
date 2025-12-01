@@ -154,7 +154,7 @@ Modify the `task_suite_name` parameter in the script to evaluate different task 
 
 
 ## 🔧 Training
->Please first download the [LIBERO datasets](https://huggingface.co/datasets/Yysrc/mantis_libero_lerobot) that we used in experiments
+>Please first download the [LIBERO datasets](https://huggingface.co/datasets/Yysrc/mantis_libero_lerobot) and the [base Mantis model](https://huggingface.co/Yysrc/Mantis-Base)
 
 First, create the training conda environment:
 ```
@@ -162,12 +162,18 @@ conda env create -f environment_lerobot.yml
 conda activate mantis_lerobot
 ```
 
-Then clone and install the Lerobot repository:
+Then clone and install the [Lerobot repository](git@github.com:Yysrc/lerobot.git):
 ```
 git clone -b paszea/lerobot git@github.com:Yysrc/lerobot.git
 cd lerobot
 conda install ffmpeg=7.1.1 -c conda-forge
 pip install -e .
+```
+The configuration files are in the `configs` folder. Please update the `dataset_root_dir` to the LIBERO dataset directory and set `resume_from_checkpoint` to the path of the base Mantis model.
+
+Trai the Mantis model on the LIBERO dataset:
+```
+sh train.sh
 ```
 
 

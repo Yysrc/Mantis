@@ -51,4 +51,4 @@ norm_stats_path: "configs/norm_stats.json"
 unnorm_key: "droid"
 
 save_part_checkpoints: True
-resume_from_checkpoint: null
+resume_from_checkpoint: "output_ssv2_image"

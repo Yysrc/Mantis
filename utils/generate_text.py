@@ -20,7 +20,7 @@ messages = [
         "content": [
             {
                 "type": "image", 
-                "image": "/inspire/hdd/project/robot-dna/sujiadi-p-sujiadi/google.png"
+                "image": "test.png"
             },
             {
                 "type": "text", 
