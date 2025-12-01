@@ -143,8 +143,8 @@ pip install -e .
 ```
 Install other required packages:
 ```
-cd Mantis
-pip install --no-upgrade -r experiments/libero/libero_requirements.txt
+cd ..
+pip install -r experiments/libero/libero_requirements.txt
 ```
 Evaluate the LIBERO benchmark:
 ```
