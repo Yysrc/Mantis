@@ -26,7 +26,7 @@
 - [Models & Datasets](#-models--datasets)
 - [Evaluation](#-evaluation)
 - [Training](#-training)
-- [Acknowledgements](#acknowledgements)
+- [Acknowledgements](#-acknowledgements)
 - [Citation](#-citation)
 
 
